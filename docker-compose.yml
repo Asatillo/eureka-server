@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  eureka:
+    build: .
+    restart: on-failure
+    ports:
+      - ${SERVER_LOCAL_PORT}:${SERVER_DOCKER_PORT}
+    env_file:
+      - .env
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.application.name": "eureka-server",
+        "server.port": "8761",
+        "eureka.instance.hostname": "localhost"
+      }'
+    stdin_open: true
+    tty: true
